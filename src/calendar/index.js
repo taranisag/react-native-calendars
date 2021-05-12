@@ -84,7 +84,7 @@ class Calendar extends Component {
 
     this.shouldComponentUpdate = shouldComponentUpdate;
   }
-  
+
   addMonth = count => {
     this.updateMonth(this.state.currentMonth.clone().addMonths(count, true));
   };
@@ -95,13 +95,12 @@ class Calendar extends Component {
     }
 
     this.setState({currentMonth: day.clone()}, () => {
-        if (!doNotTriggerListeners) {
-          const currMont = this.state.currentMonth.clone();
-          _.invoke(this.props, 'onMonthChange', xdateToData(currMont));
-          _.invoke(this.props, 'onVisibleMonthsChange', [xdateToData(currMont)]);
-        }
+      if (!doNotTriggerListeners) {
+        const currMont = this.state.currentMonth.clone();
+        _.invoke(this.props, 'onMonthChange', xdateToData(currMont));
+        _.invoke(this.props, 'onVisibleMonthsChange', [xdateToData(currMont)]);
       }
-    );
+    });
   };
 
   _handleDayInteraction(date, interaction) {
@@ -158,9 +157,12 @@ class Calendar extends Component {
       state = 'disabled';
     } else if (!dateutils.sameMonth(day, this.state.currentMonth)) {
       state = 'disabled';
-    } else if (dateutils.sameDate(day, XDate())) {
+    }
+
+    if (dateutils.sameDate(day, XDate())) {
       state = 'today';
     }
+
     return state;
   }
 

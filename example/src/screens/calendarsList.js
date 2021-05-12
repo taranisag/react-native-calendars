@@ -9,10 +9,6 @@ const CalendarsList = () => {
       color: 'rgba(37, 110, 70, 0.1)',
       textColor: 'green'
     },
-    '2021-05-12': {
-      color: 'rgba(37, 110, 70, 0.1)',
-      textColor: 'green'
-    },
     '2021-05-01': {
       color: 'rgba(37, 110, 70, 0.1)',
       textColor: 'green'
@@ -25,19 +21,19 @@ const CalendarsList = () => {
       color: 'rgba(37, 110, 70, 0.1)',
       textColor: 'green'
     },
-    '2021-05-20': {
+    '2021-05-13': {
       color: 'green',
       startingDay: true
     },
-    '2021-05-21': {
+    '2021-05-14': {
       color: 'green',
       middleDay: true
     },
-    '2021-05-22': {
+    '2021-05-15': {
       color: 'green',
       middleDay: true
     },
-    '2021-05-23': {
+    '2021-05-16': {
       color: 'green',
       endingDay: true
     },
@@ -72,6 +68,10 @@ const theme = {
       alignItems: 'center',
       justifyContent: 'center',
       borderRadius: 5
+    },
+    today: {
+      borderWidth: 1,
+      borderColor: 'green'
     }
   }
 };
