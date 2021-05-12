@@ -27,11 +27,11 @@ const CalendarsList = () => {
     },
     '2021-05-14': {
       color: 'green',
-      middleDay: true
+      selected: true
     },
     '2021-05-15': {
       color: 'green',
-      middleDay: true
+      selected: true
     },
     '2021-05-16': {
       color: 'green',

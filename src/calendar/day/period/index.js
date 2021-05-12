@@ -92,8 +92,8 @@ export default class PeriodDay extends Component {
       if (next.endingDay) {
         prev.endingDay = {color};
       }
-      if (next.middleDay) {
-        prev.middleDay = true;
+      if (next.selected) {
+        prev.selected = true;
       }
       if (!next.startingDay && !next.endingDay) {
         prev.day = {color};
@@ -187,7 +187,7 @@ export default class PeriodDay extends Component {
         });
       }
 
-      if (!flags.endingDay && !flags.startingDay && !flags.middleDay) {
+      if (!flags.endingDay && !flags.startingDay && !flags.selected) {
         fillerStyle = {
           ...fillerStyle,
           borderRadius: this.style.base.borderRadius,
