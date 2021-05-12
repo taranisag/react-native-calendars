@@ -92,6 +92,9 @@ export default class PeriodDay extends Component {
       if (next.endingDay) {
         prev.endingDay = {color};
       }
+      if (next.middleDay) {
+        prev.middleDay = true;
+      }
       if (!next.startingDay && !next.endingDay) {
         prev.day = {color};
       }
@@ -127,7 +130,6 @@ export default class PeriodDay extends Component {
 
     if (marking) {
       containerStyle.push({
-        borderRadius: this.style.base.borderRadius,
         overflow: 'hidden'
       });
 
@@ -147,7 +149,9 @@ export default class PeriodDay extends Component {
 
       if (flags.startingDay && !flags.endingDay) {
         leftFillerStyle = {
-          backgroundColor: this.theme.calendarBackground
+          backgroundColor: flags.startingDay.color,
+          borderRadius: 5,
+          left: 5
         };
         rightFillerStyle = {
           backgroundColor: flags.startingDay.color
@@ -157,7 +161,9 @@ export default class PeriodDay extends Component {
         });
       } else if (flags.endingDay && !flags.startingDay) {
         rightFillerStyle = {
-          backgroundColor: this.theme.calendarBackground
+          backgroundColor: flags.endingDay.color,
+          borderRadius: 5,
+          right: 5
         };
         leftFillerStyle = {
           backgroundColor: flags.endingDay.color
@@ -181,10 +187,20 @@ export default class PeriodDay extends Component {
         });
       }
 
+      if (!flags.endingDay && !flags.startingDay && !flags.middleDay) {
+        fillerStyle = {
+          ...fillerStyle,
+          borderRadius: this.style.base.borderRadius,
+          overflow: 'hidden',
+          left: 5,
+          right: 5
+        };
+      }
+
       fillers = (
         <View style={[this.style.fillers, fillerStyle]}>
-          {flags.endingDay && <View style={[this.style.leftFiller, leftFillerStyle]} />}
-          {flags.startingDay && <View style={[this.style.rightFiller, rightFillerStyle]} />}
+          <View style={[this.style.leftFiller, leftFillerStyle]} />
+          <View style={[this.style.rightFiller, rightFillerStyle]} />
         </View>
       );
     }
@@ -208,7 +224,7 @@ export default class PeriodDay extends Component {
       >
         <View style={this.style.wrapper}>
           {fillers}
-          <View style={containerStyle}>
+          <View style={[containerStyle, this.style.container]}>
             <Text allowFontScaling={false} style={textStyle}>
               {String(this.props.children)}
             </Text>

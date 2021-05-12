@@ -1,93 +1,79 @@
-import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
 import {CalendarList} from 'react-native-calendars';
 
 const testIDs = require('../testIDs');
-const RANGE = 24;
-const initialDate = '2020-06-10';
 
 const CalendarsList = () => {
-  const [selected, setSelected] = useState(initialDate);
   const markedDates = {
-    [selected]: {
-      selected: true,
-      disableTouchEvent: true,
-      selectedColor: '#5E60CE',
-      selectedTextColor: 'white'
+    '2021-05-11': {
+      color: 'rgba(37, 110, 70, 0.1)',
+      textColor: 'green'
+    },
+    '2021-05-12': {
+      color: 'rgba(37, 110, 70, 0.1)',
+      textColor: 'green'
+    },
+    '2021-05-01': {
+      color: 'rgba(37, 110, 70, 0.1)',
+      textColor: 'green'
+    },
+    '2021-05-02': {
+      color: 'rgba(37, 110, 70, 0.1)',
+      textColor: 'green'
+    },
+    '2021-05-19': {
+      color: 'rgba(37, 110, 70, 0.1)',
+      textColor: 'green'
+    },
+    '2021-05-20': {
+      color: 'green',
+      startingDay: true
+    },
+    '2021-05-21': {
+      color: 'green',
+      middleDay: true
+    },
+    '2021-05-22': {
+      color: 'green',
+      middleDay: true
+    },
+    '2021-05-23': {
+      color: 'green',
+      endingDay: true
+    },
+    '2021-05-24': {
+      color: 'rgba(37, 110, 70, 0.1)',
+      textColor: 'green'
+    },
+    '2021-05-25': {
+      color: 'rgba(37, 110, 70, 0.1)',
+      textColor: 'green'
     }
-  };
-  
-  const onDayPress = day => {
-    setSelected(day.dateString);
   };
 
   return (
     <CalendarList
       testID={testIDs.calendarList.CONTAINER}
-      current={initialDate}
-      pastScrollRange={RANGE}
-      futureScrollRange={RANGE}
-      renderHeader={renderCustomHeader}
+      pastScrollRange={1}
+      futureScrollRange={0}
       theme={theme}
-      onDayPress={onDayPress}
+      markingType="period"
       markedDates={markedDates}
+      disabledByDefault
     />
   );
 };
 
 const theme = {
-  'stylesheet.calendar.header': {
-    dayHeader: {
-      fontWeight: '600',
-      color: '#48BFE3'
-    }
-  },
-  'stylesheet.day.basic': {
-    today: {
-      borderColor: '#48BFE3',
-      borderWidth: 0.8
-    },
-    todayText: {
-      color: '#5390D9',
-      fontWeight: '800'
+  'stylesheet.day.period': {
+    base: {
+      width: 40,
+      height: 40,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 5
     }
   }
 };
 
-function renderCustomHeader(date) {
-  const header = date.toString('MMMM yyyy');
-  const [month, year] = header.split(' ');
-  const textStyle = {
-    fontSize: 18,
-    fontWeight: 'bold',
-    paddingTop: 10,
-    paddingBottom: 10,
-    color: '#5E60CE',
-    paddingRight: 5
-  };
-
-  return (
-    <View style={styles.header}>
-      <Text style={[styles.month, textStyle]}>{`${month}`}</Text>
-      <Text style={[styles.year, textStyle]}>{year}</Text>
-    </View>
-  );
-}
-
 export default CalendarsList;
-
-const styles = StyleSheet.create({
-  header: {
-    flexDirection: 'row',
-    width: '100%',
-    justifyContent: 'space-between',
-    marginTop: 10,
-    marginBottom: 10
-  },
-  month: {
-    marginLeft: 5
-  },
-  year: {
-    marginRight: 5
-  }
-});

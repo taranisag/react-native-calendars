@@ -1,17 +1,15 @@
 import {StyleSheet} from 'react-native';
 import * as defaultStyle from '../../../style';
 
-
 const STYLESHEET_ID = 'stylesheet.day.period';
-const FILLER_HEIGHT = 34;
+const FILLER_HEIGHT = 40;
 
-export default function styleConstructor(theme={}) {
+export default function styleConstructor(theme = {}) {
   const appStyle = {...defaultStyle, ...theme};
   return StyleSheet.create({
     wrapper: {
       alignItems: 'center',
-      alignSelf: 'stretch',
-      marginLeft: -1
+      alignSelf: 'stretch'
     },
     base: {
       width: 38,
@@ -56,7 +54,7 @@ export default function styleConstructor(theme={}) {
     disabledText: {
       color: appStyle.textDisabledColor
     },
-    
+
     quickAction: {
       backgroundColor: 'white',
       borderWidth: 1,
