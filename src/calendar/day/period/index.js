@@ -127,7 +127,7 @@ export default class PeriodDay extends Component {
 
     if (marking) {
       containerStyle.push({
-        borderRadius: 17,
+        borderRadius: this.style.base.borderRadius,
         overflow: 'hidden'
       });
 
@@ -182,10 +182,14 @@ export default class PeriodDay extends Component {
       }
 
       fillers = (
-        <View style={[this.style.fillers, fillerStyle]}>
-          <View style={[this.style.leftFiller, leftFillerStyle]}/>
-          <View style={[this.style.rightFiller, rightFillerStyle]}/>
-        </View>
+        <>
+          {flags.endingDay || flags.startingDay && (
+            <View style={[this.style.fillers, fillerStyle]}>
+              {flags.endingDay && <View style={[this.style.leftFiller, leftFillerStyle]}/>}
+              {flags.startingDay && <View style={[this.style.rightFiller, rightFillerStyle]}/>}
+            </View>
+          )}
+        </>
       );
     }
 
