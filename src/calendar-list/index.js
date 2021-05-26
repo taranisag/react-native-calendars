@@ -57,7 +57,8 @@ class CalendarList extends Component {
     /** How far from the end to trigger the onEndReached callback */
     onEndReachedThreshold: PropTypes.number,
     /** Called once when the scroll position gets within onEndReachedThreshold */
-    onEndReached: PropTypes.func
+    onEndReached: PropTypes.func,
+    FlatListComponent: PropTypes.any
   };
 
   static defaultProps = {
@@ -70,7 +71,8 @@ class CalendarList extends Component {
     scrollsToTop: false,
     scrollEnabled: true,
     removeClippedSubviews: Platform.OS === 'android',
-    keyExtractor: (item, index) => String(index)
+    keyExtractor: (item, index) => String(index),
+    FlatListComponent: FlatList
   };
 
   constructor(props) {
@@ -193,16 +195,15 @@ class CalendarList extends Component {
     }
 
     this.setState({currentMonth: day.clone()}, () => {
-        this.scrollToMonth(this.state.currentMonth);
+      this.scrollToMonth(this.state.currentMonth);
 
-        if (!doNotTriggerListeners) {
-          const currMont = this.state.currentMonth.clone();
+      if (!doNotTriggerListeners) {
+        const currMont = this.state.currentMonth.clone();
 
-          _.invoke(this.props, 'onMonthChange', xdateToData(currMont));
-          _.invoke(this.props, 'onVisibleMonthsChange', [xdateToData(currMont)]);
-        }
+        _.invoke(this.props, 'onMonthChange', xdateToData(currMont));
+        _.invoke(this.props, 'onVisibleMonthsChange', [xdateToData(currMont)]);
       }
-    );
+    });
   }
 
   onViewableItemsChanged = ({viewableItems}) => {
@@ -279,11 +280,12 @@ class CalendarList extends Component {
   }
 
   render() {
-    const {style, pastScrollRange, futureScrollRange, horizontal, showScrollIndicator, testID} = this.props;
+    const {style, pastScrollRange, futureScrollRange, horizontal, showScrollIndicator, testID, FlatListComponent} =
+      this.props;
 
     return (
       <View style={this.style.flatListContainer}>
-        <FlatList
+        <FlatListComponent
           ref={c => (this.listView = c)}
           style={[this.style.container, style]}
           initialListSize={pastScrollRange + futureScrollRange + 1} // ListView deprecated
