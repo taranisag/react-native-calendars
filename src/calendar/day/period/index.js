@@ -16,7 +16,12 @@ export default class PeriodDay extends Component {
     theme: PropTypes.object,
     onPress: PropTypes.func,
     onLongPress: PropTypes.func,
-    date: PropTypes.object
+    date: PropTypes.object,
+    DayPressComponent: PropTypes.any
+  };
+
+  static defaultProps = {
+    DayPressComponent: TouchableWithoutFeedback
   };
 
   constructor(props) {
@@ -209,11 +214,12 @@ export default class PeriodDay extends Component {
       marking: {marked, dotColor, disableTouchEvent},
       theme,
       accessibilityLabel,
-      testID
+      testID,
+      DayPressComponent
     } = this.props;
 
     return (
-      <TouchableWithoutFeedback
+      <DayPressComponent
         testID={testID}
         onPress={this.onPress}
         onLongPress={this.onLongPress}
@@ -231,7 +237,7 @@ export default class PeriodDay extends Component {
             <Dot theme={theme} color={dotColor} marked={marked} />
           </View>
         </View>
-      </TouchableWithoutFeedback>
+      </DayPressComponent>
     );
   }
 }
