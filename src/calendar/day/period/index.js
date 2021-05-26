@@ -218,6 +218,10 @@ export default class PeriodDay extends Component {
       DayPressComponent
     } = this.props;
 
+    const gestureHandlerContainerStyle = {
+      alignSelf: 'stretch'
+    };
+
     return (
       <DayPressComponent
         testID={testID}
@@ -227,7 +231,7 @@ export default class PeriodDay extends Component {
         accessible
         accessibilityRole={disableTouchEvent ? undefined : 'button'}
         accessibilityLabel={accessibilityLabel}
-        style={DayPressComponent && this.style.wrapper}
+        containerStyle={DayPressComponent && gestureHandlerContainerStyle}
       >
         <View style={this.style.wrapper}>
           {fillers}
