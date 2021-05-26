@@ -227,6 +227,7 @@ export default class PeriodDay extends Component {
         accessible
         accessibilityRole={disableTouchEvent ? undefined : 'button'}
         accessibilityLabel={accessibilityLabel}
+        style={DayPressComponent && this.style.wrapper}
       >
         <View style={this.style.wrapper}>
           {fillers}
