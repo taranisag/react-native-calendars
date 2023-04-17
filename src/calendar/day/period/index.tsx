@@ -18,6 +18,7 @@ export interface PeriodDayProps extends ViewProps {
   onLongPress?: (date?: DateData) => void;
   accessibilityLabel?: string;
   testID?: string;
+  DayPressComponent?: any;
 }
 
 type MarkingStyle = {
@@ -29,7 +30,7 @@ type MarkingStyle = {
 }
 
 const PeriodDay = (props: PeriodDayProps) => {
-  const {theme, marking, date, onPress, onLongPress, state, accessibilityLabel, testID, children} = props;
+  const {theme, marking, date, onPress, onLongPress, state, accessibilityLabel, testID, children, DayPressComponent} = props;
   const dateData = date ? xdateToData(date) : undefined;
   const style = useRef(styleConstructor(theme));
 
@@ -46,7 +47,7 @@ const PeriodDay = (props: PeriodDayProps) => {
       } else if (marking.selected) {
         defaultStyle.textStyle = {color: style.current.selectedText.color};
       }
-  
+
       if (marking.startingDay) {
         defaultStyle.startingDay = {backgroundColor: marking.color};
       }
@@ -56,7 +57,7 @@ const PeriodDay = (props: PeriodDayProps) => {
       if (!marking.startingDay && !marking.endingDay) {
         defaultStyle.day = {backgroundColor: marking.color};
       }
-      
+
       if (marking.textColor) {
         defaultStyle.textStyle = {color: marking.textColor};
       }
@@ -66,7 +67,7 @@ const PeriodDay = (props: PeriodDayProps) => {
       if (marking.customContainerStyle) {
         defaultStyle.containerStyle = marking.customContainerStyle;
       }
-  
+
       return defaultStyle;
     }
   }, [marking]);
@@ -80,10 +81,10 @@ const PeriodDay = (props: PeriodDayProps) => {
 
     if (marking) {
       containerStyle.push({
-        borderRadius: 17,
+        borderRadius: style.current.base.borderRadius,
         overflow: 'hidden'
       });
-      
+
       if (markingStyle.containerStyle) {
         containerStyle.push(markingStyle.containerStyle);
       }
@@ -137,6 +138,16 @@ const PeriodDay = (props: PeriodDayProps) => {
       fillerStyle = {backgroundColor: markingStyle.day?.backgroundColor};
     }
 
+    if (!end && !start && !marking?.selected) {
+      fillerStyle = {
+        ...fillerStyle,
+        borderRadius: style.current.base.borderRadius,
+        overflow: 'hidden',
+        left: 5,
+        right: 5
+      };
+    }
+
     return {leftFillerStyle, rightFillerStyle, fillerStyle};
   }, [marking]);
 
@@ -158,9 +169,9 @@ const PeriodDay = (props: PeriodDayProps) => {
   const _onLongPress = useCallback(() => {
     onLongPress?.(dateData);
   }, [onLongPress]);
-    
-  const Component = marking ? TouchableWithoutFeedback : TouchableOpacity;
-  
+
+  const Component = DayPressComponent ?? (marking ? TouchableWithoutFeedback : TouchableOpacity);
+
   return (
     <Component
       testID={testID}

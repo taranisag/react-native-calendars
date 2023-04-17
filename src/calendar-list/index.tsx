@@ -38,6 +38,7 @@ export interface CalendarListProps extends CalendarProps, Omit<FlatListProps<any
   showScrollIndicator?: boolean;
   /** Whether to animate the auto month scroll */
   animateScroll?: boolean;
+  FlatListComponent?: any
 }
 
 export interface CalendarListImperativeMethods {
@@ -99,7 +100,8 @@ const CalendarList = (props: CalendarListProps & ContextProp, ref: any) => {
     onMomentumScrollEnd,
     /** FlatList props */
     onEndReachedThreshold,
-    onEndReached
+    onEndReached,
+    FlatListComponent = FlatList
   } = props;
 
   const calendarProps = extractCalendarProps(props);
@@ -283,7 +285,7 @@ const CalendarList = (props: CalendarListProps & ContextProp, ref: any) => {
 
   return (
     <View style={style.current.flatListContainer} testID={testID}>
-      <FlatList
+      <FlatListComponent
         // @ts-expect-error
         ref={list}
         style={listStyle}

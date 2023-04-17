@@ -31,6 +31,8 @@ export interface BasicDayProps extends ViewProps {
   testID?: string;
   /** Accessibility label */
   accessibilityLabel?: string;
+
+  DayPressComponent?: any
 }
 
 const BasicDay = (props: BasicDayProps) => {
@@ -46,7 +48,8 @@ const BasicDay = (props: BasicDayProps) => {
     disableAllTouchEventsForInactiveDays,
     accessibilityLabel,
     children,
-    testID
+    testID,
+    DayPressComponent = TouchableOpacity
   } = props;
   const style = useRef(styleConstructor(theme));
   const _marking = marking || {};
@@ -170,7 +173,7 @@ const BasicDay = (props: BasicDayProps) => {
     const {activeOpacity} = _marking;
 
     return (
-      <TouchableOpacity
+      <DayPressComponent
         testID={testID}
         style={getContainerStyle()}
         disabled={shouldDisableTouchEvent()}
@@ -182,7 +185,7 @@ const BasicDay = (props: BasicDayProps) => {
         accessibilityLabel={accessibilityLabel}
       >
         {isMultiPeriod ? renderText() : renderContent()}
-      </TouchableOpacity>
+      </DayPressComponent>
     );
   };
 

@@ -4,7 +4,7 @@ import {CalendarList, DateData} from 'react-native-calendars';
 import testIDs from '../testIDs';
 
 const RANGE = 24;
-const initialDate = '2022-07-05';
+const initialDate = '2021-05-05';
 const nextWeekDate = '2022-07-14';
 const nextMonthDate = '2022-08-05';
 
@@ -17,16 +17,6 @@ const CalendarListScreen = (props: Props) => {
   const [selected, setSelected] = useState(initialDate);
   const marked = useMemo(() => {
     return {
-      [nextWeekDate]: {
-        selected: selected === nextWeekDate,
-        selectedTextColor: '#5E60CE',
-        marked: true
-      },
-      [nextMonthDate]: {
-        selected: selected === nextMonthDate,
-        selectedTextColor: '#5E60CE',
-        marked: true
-      },
       [selected]: {
         selected: true,
         disableTouchEvent: true,
@@ -35,6 +25,52 @@ const CalendarListScreen = (props: Props) => {
       }
     };
   }, [selected]);
+  const markedDates = {
+    '2021-05-11': {
+      color: 'rgba(37, 110, 70, 0.1)',
+      textColor: 'green'
+    },
+    '2021-05-12': {
+      color: 'rgba(37, 110, 70, 0.1)',
+      textColor: 'green'
+    },
+    '2021-05-01': {
+      color: 'rgba(37, 110, 70, 0.1)',
+      textColor: 'green'
+    },
+    '2021-05-02': {
+      color: 'rgba(37, 110, 70, 0.1)',
+      textColor: 'green'
+    },
+    '2021-05-19': {
+      color: 'rgba(37, 110, 70, 0.1)',
+      textColor: 'green',
+    },
+    '2021-05-20': {
+      color: 'green',
+      startingDay: true
+    },
+    '2021-05-21': {
+      color: 'green',
+      selected: true,
+    },
+    '2021-05-22': {
+      color: 'green',
+      selected: true,
+    },
+    '2021-05-23': {
+      color: 'green',
+      endingDay: true
+    },
+    '2021-05-24': {
+      color: 'rgba(37, 110, 70, 0.1)',
+      textColor: 'green'
+    },
+    '2021-05-25': {
+      color: 'rgba(37, 110, 70, 0.1)',
+      textColor: 'green'
+    },
+  };
 
   const onDayPress = useCallback((day: DateData) => {
     setSelected(day.dateString);
@@ -44,21 +80,42 @@ const CalendarListScreen = (props: Props) => {
     <CalendarList
       testID={testIDs.calendarList.CONTAINER}
       current={initialDate}
-      pastScrollRange={RANGE}
-      futureScrollRange={RANGE}
       onDayPress={onDayPress}
-      markedDates={marked}
-      renderHeader={!horizontalView ? renderCustomHeader : undefined}
-      calendarHeight={!horizontalView ? 390 : undefined}
-      theme={!horizontalView ? theme : undefined}
-      horizontal={horizontalView}
-      pagingEnabled={horizontalView}
-      staticHeader={horizontalView}
+      markedDates={markedDates}
+      pastScrollRange={12}
+      futureScrollRange={0}
+      markingType="period"
+      disabledByDefault
+      theme={theme}
     />
   );
 };
 
 const theme = {
+  'stylesheet.day.period': {
+    base: {
+      width: 40,
+      height: 40,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 5
+    },
+    fillers: {
+      position: 'absolute',
+      height: 40,
+      flexDirection: 'row',
+      left: 0,
+      right: 0,
+    },
+    leftFiller: {
+      height: 40,
+      flex: 1
+    },
+    rightFiller: {
+      height: 40,
+      flex: 1
+    }
+  },
   stylesheet: {
     calendar: {
       header: {
