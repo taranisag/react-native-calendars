@@ -1,9 +1,7 @@
 import React from 'react';
 import {CalendarList} from 'react-native-calendars';
 import testIDs from '../testIDs';
-
 const initialDate = '2021-05-05';
-
 const CalendarListScreen = () => {
   const markedDates = {
     '2021-05-11': {
@@ -24,23 +22,23 @@ const CalendarListScreen = () => {
     },
     '2021-05-19': {
       color: 'rgba(37, 110, 70, 0.1)',
-      textColor: 'green',
+      textColor: 'green'
     },
     '2021-05-20': {
       color: 'green',
-      startingDay: true,
+      startingDay: true
     },
     '2021-05-21': {
       color: 'green',
-      selected: true,
+      selected: true
     },
     '2021-05-22': {
       color: 'green',
-      selected: true,
+      selected: true
     },
     '2021-05-23': {
       color: 'green',
-      endingDay: true,
+      endingDay: true
     },
     '2021-05-24': {
       color: 'rgba(37, 110, 70, 0.1)',
@@ -49,9 +47,8 @@ const CalendarListScreen = () => {
     '2021-05-25': {
       color: 'rgba(37, 110, 70, 0.1)',
       textColor: 'green'
-    },
+    }
   };
-
   return (
     <CalendarList
       testID={testIDs.calendarList.CONTAINER}
@@ -65,7 +62,6 @@ const CalendarListScreen = () => {
     />
   );
 };
-
 const theme = {
   'stylesheet.day.period': {
     base: {
@@ -80,7 +76,7 @@ const theme = {
       height: 40,
       flexDirection: 'row',
       left: 0,
-      right: 0,
+      right: 0
     },
     leftFiller: {
       height: 40,
@@ -112,5 +108,4 @@ const theme = {
     }
   }
 };
-
 export default CalendarListScreen;
