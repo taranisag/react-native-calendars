@@ -96,15 +96,15 @@ const PeriodDay = props => {
       rightFillerStyle.backgroundColor = markingStyle.day?.backgroundColor;
       fillerStyle = {backgroundColor: markingStyle.day?.backgroundColor};
     }
-    // if (!end && !start && !marking?.selected) {
-    //   fillerStyle = {
-    //     ...fillerStyle,
-    //     borderRadius: style.current.base.borderRadius,
-    //     overflow: 'hidden',
-    //     left: 5,
-    //     right: 5
-    //   };
-    // }
+    if (!end && !start && !marking?.selected) {
+      fillerStyle = {
+        ...fillerStyle,
+        borderRadius: style.current.base.borderRadius,
+        overflow: 'hidden',
+        left: 5,
+        right: 5
+      };
+    }
     return {leftFillerStyle, rightFillerStyle, fillerStyle};
   }, [marking]);
   const renderFillers = () => {
