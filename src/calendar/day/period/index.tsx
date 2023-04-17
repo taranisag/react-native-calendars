@@ -142,7 +142,7 @@ const PeriodDay = (props: PeriodDayProps) => {
       fillerStyle = {
         ...fillerStyle,
         borderRadius: style.current.base.borderRadius,
-        overflow: 'hidden', 
+        overflow: 'hidden',
         left: 5,
         right: 5
       };
